@@ -23,13 +23,24 @@ metadata:
 spec:
   affinity:
     podAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: app-name
-            operator: In
-            values:
-            - pod-1
+      #requiredDuringSchedulingIgnoredDuringExecution:
+      #- labelSelector:
+      #    matchExpressions:
+      #    - key: app-name
+      #      operator: In
+      #      values:
+      #      - pod-1
+      #  topologyKey: "kubernetes.io/hostname"
+    podAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app-name
+              operator: In
+              values:
+              - pod-1
         topologyKey: "kubernetes.io/hostname"
   containers:
   - name: pod-2
