@@ -11,27 +11,26 @@ spec:
     image: nginx
 
 
-#---
-#
-#apiVersion: v1
-#kind: Pod
-#metadata:
-#  name: pod-2
-#  labels:
-#    app-name: pod-2
-#    purpose: pod-affinity
-#spec:
-#  affinity:
-#    podAntiAffinity::
-#      requiredDuringSchedulingIgnoredDuringExecution:
-#      - labelSelector:
-#          matchExpressions:
-#          - key: app-name
-#            operator: In
-#            values:
-#            - pod-1
-#        topologyKey: "kubernetes.io/hostname"
-#  containers:
-#  - name: pod-2
-#    image: nginx
-#
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+  labels:
+    app-name: pod-2
+    purpose: pod-anti-affinity
+spec:
+  affinity:
+    podAntiAffinity:: # pod 1 una chota nenu undanu
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app-name
+            operator: In
+            values:
+            - pod-1
+        topologyKey: "kubernetes.io/hostname"
+  containers:
+  - name: pod-2
+    image: nginx
