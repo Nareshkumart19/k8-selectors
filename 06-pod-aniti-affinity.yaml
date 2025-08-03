@@ -22,7 +22,7 @@ metadata:
     purpose: pod-anti-affinity
 spec:
   affinity:
-    podAntiAffinity:: 
+    podAntiAffinity: 
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
